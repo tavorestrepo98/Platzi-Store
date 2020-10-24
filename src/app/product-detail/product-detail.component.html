@@ -1,0 +1,12 @@
+<div class="product-grid">
+    <img [src]="product.image" alt="" width="100px">
+</div>
+<div>
+    <ul>
+        <li>Nombre: {{product.title}}</li>
+        <li>Precio: {{product.price | currency}}</li>
+    </ul>
+    <p>
+        {{product.description}}
+    </p>
+</div>
