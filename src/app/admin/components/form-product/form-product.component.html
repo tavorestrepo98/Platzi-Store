@@ -1,0 +1,48 @@
+<form [formGroup]="form" (ngSubmit)="saveProduct($event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Product</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Id</mat-label>
+                    <input matInput formControlName="id" type="text">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Título</mat-label>
+                    <input matInput formControlName="title" type="text">
+                </mat-form-field>
+            </div>
+            <div class="rowInput">
+                <div class="inputDiv">
+                    <mat-form-field>
+                        <mat-label>Precio</mat-label>
+                        <input matInput formControlName="price" type="number">
+                    </mat-form-field>
+                </div>
+                <div class="errorDiv" *ngIf="priceField.errors && priceField.dirty">
+                    <p *ngIf="priceField.hasError('price_invalid')">No te debes pasar de 100 mil</p>
+                    <p *ngIf="priceField.hasError('required')">Este campo es requerido</p>
+                </div>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput formControlName="description" type="text"></textarea>
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <img *ngIf="(image$ | async) as image" [src]="image">
+                <input type="file" name="image" (change)="uploadFile($event)">
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="buttonRow">
+                <button mat-raised-button [disabled]="form.invalid" type="submit">Guardar</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>

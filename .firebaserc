@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "platzi-store-bf240": {
+      "hosting": {
+        "platzi-store": [
+          "platzi-store-bf240"
+        ]
+      }
+    }
+  }
+}

@@ -31,12 +31,25 @@ const routes: Routes = [
       {
         path: 'demo',
         loadChildren: () => import('./demo/demo.module').then(m => m.DemoModule)
+      },
+      {
+        path: 'order',
+        loadChildren: () => import('./order/order.module').then(m => m.OrderModule)
       }
     ]
   },
   {
     path: 'admin',
+    canActivate: [AdminGuard],
     loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then(m => m.RegistroModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
     path: '**',

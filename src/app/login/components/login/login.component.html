@@ -1,0 +1,26 @@
+<form [formGroup]="form" class="formLog" (ngSubmit)="loginUser($event)">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Logear</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>email</mat-label>
+                    <input matInput formControlName="email" type="text">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <mat-form-field>
+                    <mat-label>password</mat-label>
+                    <input matInput formControlName="password" type="password">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="buttonRow">
+                <button mat-raised-button [disabled]="form.invalid" type="submit">Guardar</button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
+</form>

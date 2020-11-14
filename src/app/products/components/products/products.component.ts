@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../../product.model';
+import { Product } from '../../../core/models/product.model';
 import { ProductsService } from '../../../core/services/products/products.service';
 
 @Component({
@@ -13,11 +13,19 @@ export class ProductsComponent implements OnInit {
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
-    this.products = this.productsService.getAllProducts();
+   // this.products = this.productsService.getAllProducts();
+   this.fetchProducts();
   }
 
   clickProduct(id: string): void{
     console.log('Producto: ' + id);
+  }
+
+  fetchProducts(): void{
+    this.productsService.getAllProducts()
+    .subscribe(products => {
+      this.products = products;
+    });
   }
 
 }

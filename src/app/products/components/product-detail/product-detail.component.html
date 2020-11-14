@@ -1,12 +1,17 @@
-<div class="product-grid">
-    <img [src]="product.image" alt="" width="100px">
-</div>
-<div>
-    <ul>
-        <li>Nombre: {{product.title}}</li>
-        <li>Precio: {{product.price | currency}}</li>
-    </ul>
-    <p>
-        {{product.description}}
-    </p>
+<div *ngIf="product">
+    <div class="product-grid">
+        <img [src]="product.image" alt="" width="100px">
+    </div>
+    <div>
+        <ul>
+            <li>Nombre: {{product.title}}</li>
+            <li>Precio: {{product.price | currency}}</li>
+        </ul>
+        <p>
+            {{product.description}}
+        </p>
+    </div>
+    <button (click)="createProduct()">Crear</button>
+    <button (click)="updateProduct()">Actualizar</button>
+    <button (click)="deleteProduct()">Eliminar</button>
 </div>
