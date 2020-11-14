@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Product } from '../../models/product.model';
 
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -15,13 +15,11 @@ export class ProductsService {
     private http: HttpClient
   ) { }
 
-  // tslint:disable-next-line: typedef
-  getAllProducts(){
+  getAllProducts(): Observable<object>{
     return this.http.get<Product []>(`${environment.url_api}/`);
   }
 
-  // tslint:disable-next-line: typedef
-  getProduct(id: string){
+  getProduct(id: string): Observable<object>{
     return this.http.get<Product>(`${environment.url_api}/${id}`);
   }
 
