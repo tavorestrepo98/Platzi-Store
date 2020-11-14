@@ -15,11 +15,11 @@ export class ProductsService {
     private http: HttpClient
   ) { }
 
-  getAllProducts(): Observable<object>{
+  getAllProducts(): Observable<Product[]>{
     return this.http.get<Product []>(`${environment.url_api}/`);
   }
 
-  getProduct(id: string): Observable<object>{
+  getProduct(id: string): Observable<Product>{
     return this.http.get<Product>(`${environment.url_api}/${id}`);
   }
 
