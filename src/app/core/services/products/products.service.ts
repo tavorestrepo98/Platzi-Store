@@ -15,11 +15,13 @@ export class ProductsService {
     private http: HttpClient
   ) { }
 
-  getAllProducts(): Observable<Product[]>{
+  // tslint:disable-next-line: typedef
+  getAllProducts(){
     return this.http.get<Product []>(`${environment.url_api}/`);
   }
 
-  getProduct(id: string): Observable<Product>{
+  // tslint:disable-next-line: typedef
+  getProduct(id: string){
     return this.http.get<Product>(`${environment.url_api}/${id}`);
   }
 
