@@ -12,6 +12,8 @@ import { MaterialModule } from '../material/material.module';
 import { CartRepeatPipe } from './pipes/cart/cart-repeat.pipe';
 import { DeleteRepeatsPipe } from './pipes/deletrepeat/delete-repeats.pipe';
 
+import { QuicklinkModule } from 'ngx-quicklink';
+
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { DeleteRepeatsPipe } from './pipes/deletrepeat/delete-repeats.pipe';
     CommonModule,
     RouterModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuicklinkModule
   ]
 })
 export class SharedModule { }

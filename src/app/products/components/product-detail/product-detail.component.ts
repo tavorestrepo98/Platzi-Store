@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+
 import { ProductsService } from '../../../core/services/products//products.service';
 import { Product } from '../../../core/models/product.model';
+
+import * as FileSaver from 'file-saver';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +17,7 @@ import { Product } from '../../../core/models/product.model';
 })
 export class ProductDetailComponent implements OnInit {
 
-  product: Product;
+  product$: Observable<Product>;
 
   constructor(
     private route: ActivatedRoute,
@@ -19,18 +25,10 @@ export class ProductDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params: Params) =>{
-      const id: string = params.id;
-      this.fetchProduct(id);
-      // this.product = this.productService.getProduct(id);
-    });
-  }
-
-  fetchProduct(id: string): void{
-    this.productService.getProduct(id)
-    .subscribe(product => {
-      this.product = product;
-    });
+    this.product$ = this.route.params
+    .pipe(
+      switchMap((params: Params) => this.productService.getProduct(params.id))
+    );
   }
 
   createProduct(): void{
@@ -43,8 +41,12 @@ export class ProductDetailComponent implements OnInit {
     };
 
     this.productService.createProduct(newProduct)
-    .subscribe(producto => {
+    .subscribe(
+      producto => {
       console.log(producto);
+    },
+    error => {
+      console.error('Error: ', error);
     });
   }
 
@@ -54,8 +56,12 @@ export class ProductDetailComponent implements OnInit {
       description: 'edicion de titulo'
     };
     this.productService.updateProduct('29', updateProduct)
-    .subscribe(producto => {
-      console.log(producto);
+    .subscribe(
+    producto => {
+    console.log(producto);
+    },
+    error => {
+      console.error('Error: ', error);
     });
   }
 
@@ -63,6 +69,15 @@ export class ProductDetailComponent implements OnInit {
     this.productService.deleteProduct('29')
     .subscribe(resp =>{
       console.log(resp);
+    });
+  }
+
+  getFile(): void{
+    this.productService.getFile()
+    .subscribe(content => {
+      console.log(content);
+      const blob = new Blob([content], {type: 'text/plain;charset=utf-8'});
+      FileSaver.saveAs(blob, 'hello.txt');
     });
   }
 

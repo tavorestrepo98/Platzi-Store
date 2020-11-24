@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
 import { logging } from 'protractor';
 
 import { AuthService } from '../../../core/services/auth/auth.service';
@@ -38,6 +38,13 @@ export class LoginComponent implements OnInit {
       });
     }
 
+  }
+
+  loginApi(): void{
+    this.authService.loginRestApi('gustavo.restrepo@utp.edu.co', 'tavo1798')
+    .subscribe(data => {
+      console.log(data);
+    });
   }
 
   private buildForm(): void {

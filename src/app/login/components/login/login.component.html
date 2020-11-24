@@ -20,6 +20,7 @@
         <mat-card-actions>
             <div class="buttonRow">
                 <button mat-raised-button [disabled]="form.invalid" type="submit">Guardar</button>
+                <button mat-raised-button [disabled]="form.invalid" type="button" (click)="loginApi()">Login api</button>
             </div>
         </mat-card-actions>
     </mat-card>

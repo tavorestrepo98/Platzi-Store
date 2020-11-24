@@ -16,9 +16,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from '@angular/cdk/layout';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { environment } from '../environments/environment.prod';
+
+import * as Sentry from '@sentry/browser';
+import { Integrations as TracingIntegrations } from '@sentry/tracing';
+
+import { QuicklinkModule } from 'ngx-quicklink';
+
+
+Sentry.init({
+  dsn: 'https://899af9b12d3747848beb2a91f17dedd5@o478302.ingest.sentry.io/5520612',
+  integrations: [new TracingIntegrations.BrowserTracing()],
+});
+
 
 @NgModule({
   declarations: [
@@ -37,9 +50,16 @@ import { environment } from '../environments/environment.prod';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    QuicklinkModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

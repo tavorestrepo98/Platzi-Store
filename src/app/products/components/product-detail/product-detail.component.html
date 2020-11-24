@@ -1,4 +1,4 @@
-<div *ngIf="product">
+<div *ngIf="(product$ | async) as product">
     <div class="product-grid">
         <img [src]="product.image" alt="" width="100px">
     </div>
@@ -14,4 +14,5 @@
     <button (click)="createProduct()">Crear</button>
     <button (click)="updateProduct()">Actualizar</button>
     <button (click)="deleteProduct()">Eliminar</button>
+    <button (click)="getFile()">File</button>
 </div>
